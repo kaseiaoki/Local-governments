@@ -8,7 +8,9 @@
 
 require('./vendor/autoload.php');
 require('./src/client.php');
+require('./src/jsonParse.php');
 
-$client = new client();
-$client->basic_request();
-
+$client = new client;
+$data = $client->basic_request();
+$jsonParse = new jsonParse($data);
+$jsonParse->csv();
