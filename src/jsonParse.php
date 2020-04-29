@@ -21,9 +21,10 @@ class jsonParse
     public function csv() {
         $json = $this->json;
         $json_array = json_decode($json, true);
-        foreach ($json_array as $json_object) {
-            var_dump($json_object);
-            exit;
+        $results_array = $json_array["results"]["bindings"];
+        foreach ($results_array as $value) {
+            $row = str_replace("-",  "" ,$value["code"]["value"]) . "," . $value["name"]["value"] . "," . $value["homepage"]["value"] . "\n";
+            file_put_contents ("homepage.csv", $row, FILE_APPEND);
         }
     }
 }
